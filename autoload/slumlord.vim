@@ -110,11 +110,11 @@ endfunction
 function! s:convertNonAsciiSupportedSyntax(fname) abort
     exec 'sp' a:fname
 
-    /@startuml/,/@enduml/s/^\s*\(boundary\|database\|entity\|control\)/participant/e
-    /@startuml/,/@enduml/s/^\s*\(end \)\?\zsref\>/note/e
-    /@startuml/,/@enduml/s/^\s*ref\>/note/e
-    /@startuml/,/@enduml/s/|||/||4||/e
-    /@startuml/,/@enduml/s/\.\.\.\([^.]*\)\.\.\./==\1==/e
+    /^@start/,/^@end/s/^\s*\(boundary\|database\|entity\|control\)/participant/e
+    /^@start/,/^@end/s/^\s*\(end \)\?\zsref\>/note/e
+    /^@start/,/^@end/s/^\s*ref\>/note/e
+    /^@start/,/^@end/s/|||/||4||/e
+    /^@start/,/^@end/s/\.\.\.\([^.]*\)\.\.\./==\1==/e
     write
 
     bwipe!
@@ -152,7 +152,7 @@ endfunction
 
 " InPlaceUpdater object {{{1
 let s:InPlaceUpdater = {}
-let s:InPlaceUpdater.divider = "@startuml"
+let s:InPlaceUpdater.divider = "@start"
 
 function! s:InPlaceUpdater.update(args) abort
     let startLine = line(".")
