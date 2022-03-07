@@ -80,6 +80,11 @@ function! s:shouldInsertPreview() abort
         return
     endif
 
+    "skip mindmaps for now
+    if search('^@startmindmap', 'wn') > 0
+        return
+    endif
+
     return 1
 endfunction
 
